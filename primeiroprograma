@@ -1,0 +1,64 @@
+import 'package:flutter/material.dart'; // Importa os widgets e funcionalidades do Flutter
+
+// Função principal que inicia o aplicativo
+void main() {
+  runApp(const MyApp()); // MyApp será o widget raiz da aplicação
+}
+
+// Define o widget raiz do aplicativo
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Layout Responsivo', // Nome do app que aparecerá no navegador
+      theme: ThemeData(primarySwatch: Colors.blue), // Tema básico com cor azul
+      home: const ResponsiveLayout(), // Define a página principal
+    );
+  }
+}
+
+// Widget principal que define o layout responsivo
+class ResponsiveLayout extends StatelessWidget {
+  const ResponsiveLayout({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    // Obtém o tamanho da tela atual
+    final screenWidth = MediaQuery.of(context).size.width;
+
+    // Retorna o layout com base no tamanho da tela
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Layout Responsivo'), // Título da barra superior
+      ),
+      body: Center(
+        child: screenWidth < 600 // Se a largura for menor que 600px:
+            ? Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: const [
+                  Text(
+                    'Bem-vindo ao Layout Responsivo!',
+                    style: TextStyle(fontSize: 20),
+                    textAlign: TextAlign.center,
+                  ),
+                  SizedBox(height: 20),
+                  Icon(Icons.phone_android, size: 50), // Ícone para telas pequenas
+                ],
+              )
+            : Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: const [
+                  Icon(Icons.computer, size: 50), // Ícone para telas grandes
+                  SizedBox(width: 20),
+                  Text(
+                    'Bem-vindo ao Layout Responsivo!',
+                    style: TextStyle(fontSize: 24),
+                  ),
+                ],
+              ),
+      ),
+    );
+  }
+}
